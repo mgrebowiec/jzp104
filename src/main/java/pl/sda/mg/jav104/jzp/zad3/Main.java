@@ -1,6 +1,7 @@
 package pl.sda.mg.jav104.jzp.zad3;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class Main {
@@ -72,6 +73,21 @@ public class Main {
     private static void printMapUsingStream(Map<String, Integer> sampleMap) {
         String message = sampleMap.entrySet().stream()
                 .map(mapEntry -> "Klucz: " + mapEntry.getKey() + ", Wartość: " + mapEntry.getValue())
+                .collect(Collectors.joining(",\n", "", "."));
+
+        System.out.println(message);
+    }
+
+    // to samo co metoda #printMapUsingStream, tylko zamiast wyrażenia lambda użyliśmy
+    // anonimowej klasy
+    private static void printMapUsingStreamAndAnonymousClass(Map<String, Integer> sampleMap) {
+        String message = sampleMap.entrySet().stream()
+                .map(new Function<Map.Entry<String, Integer>, String>() {
+                    @Override
+                    public String apply(Map.Entry<String, Integer> mapEntry) {
+                        return "Klucz: " + mapEntry.getKey() + ", Wartość: " + mapEntry.getValue();
+                    }
+                })
                 .collect(Collectors.joining(",\n", "", "."));
 
         System.out.println(message);

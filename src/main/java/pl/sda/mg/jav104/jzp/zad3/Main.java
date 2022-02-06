@@ -16,6 +16,8 @@ public class Main {
         printMap(sampleMap);
         System.out.println("-------------------------");
         printMapUsingIterator(sampleMap);
+        System.out.println("-------------------------");
+        printMapUsingStream(sampleMap);
 
 //        sampleMap = new HashMap<>();
 ////        sampleMap.put("pierwszy", 1);
@@ -70,7 +72,7 @@ public class Main {
     private static void printMapUsingStream(Map<String, Integer> sampleMap) {
         String message = sampleMap.entrySet().stream()
                 .map(mapEntry -> "Klucz: " + mapEntry.getKey() + ", Wartość: " + mapEntry.getValue())
-                .collect(Collectors.joining("\n", " ", "."));
+                .collect(Collectors.joining(",\n", "", "."));
 
         System.out.println(message);
     }

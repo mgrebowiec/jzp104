@@ -2,6 +2,7 @@ package pl.sda.mg.jav104.jzp.zad12;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 public class CarMain {
     public static void main(String[] args) {
@@ -11,7 +12,7 @@ public class CarMain {
         );
 
         Car golf = new Car("WV Golf", "GOLF", 200, 2015,
-                Arrays.asList(new Manufacturer("XTZ", 1984, "Germany")),
+                Arrays.asList(new Manufacturer("XTZ", 1984, "Germany"), new Manufacturer("AAA", 1932, "Germany")),
                 EngineType.S4
         );
 
@@ -42,6 +43,18 @@ public class CarMain {
 
         Car cheapestCar = carService.getCheapestCar();
         System.out.println("Najtansze auto to: " + cheapestCar);
+
+        List<Car> carsWithMin2Manufacturers = carService.getCarsWithManufacturersMinCount(2);
+        System.out.println("Samochody z min 2 producentami: " + carsWithMin2Manufacturers);
+
+        List<Car> sortedCars = carService.sortCars(SortType.DESC, Car::getName);
+        System.out.println("Samochody posortowane malejaco: \n" + sortedCars);
+
+        List<Car> carsProducedByManufacturer = carService.getCarsProducedBy(new Manufacturer("AAA", 1932, "Germany"));
+        System.out.println("Samochody wyprodukowane przez AAA" + carsProducedByManufacturer);
+
+        List<Car> carsProducedByManufacturerWithYear = carService.getCarsProducedByManufacturerWithYear(1983, ComparisonFunction.LESS_THAN);
+        System.out.println("Samochody wyprodukowane przez producenta zalozonego przed 1983:\n" + carsProducedByManufacturerWithYear);
 
     }
 }
